@@ -1,4 +1,18 @@
 {
-  "name": "John",
-  "age": 20
+  "name": "Alice",
+  "age": 20,
+  "phoneNumber": [
+    {
+      "type": "home",
+      "number": "212-333-1111"
+    },
+    {
+      "type": "fax",
+      "number": "646-444-2222"
+    }
+  ],
+  "address": {
+    "city": "New York",
+    "streetAddress": "100 Wall Street"
+  }
 }

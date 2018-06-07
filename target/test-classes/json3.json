@@ -1,4 +1,14 @@
 {
-  "name": "John",
-  "age": 20
+  "name": "Ann",
+  "age": 20,
+  "phoneNumber": [
+    {
+      "type": "home",
+      "number": "555-555"
+    }
+  ],
+  "address": {
+    "city": "New York",
+    "streetAddress": "Main str"
+  }
 }
