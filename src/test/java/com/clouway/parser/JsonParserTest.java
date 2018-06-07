@@ -51,8 +51,6 @@ public class JsonParserTest {
 
         assertThat(person.phoneNumber.get(0).type, is("home"));
 
-        codec.parseObject(person);
-
 
     }
 
@@ -81,7 +79,37 @@ public class JsonParserTest {
 
     }
 
+    @Test
+    public void flipFileToObjectAndBack(){
 
+        MessageCodec<ComplexPerson> codec = new JsonCodec<ComplexPerson>(ComplexPerson.class);
+
+        ComplexPerson person = new ComplexPerson();
+        person.name = "Ann";
+        person.age = 20;
+
+        ComplexPerson.phoneNumber phoneNumber = new ComplexPerson.phoneNumber();
+        phoneNumber.type = "home";
+        phoneNumber.number = "555-555";
+
+        ComplexPerson.address address = new ComplexPerson.address();
+
+        address.city = "New York";
+        address.streetAddress = "Main str";
+
+        person.phoneNumber.add(phoneNumber);
+        person.address = address;
+
+        codec.parseObject(person);
+
+        File file = new File("/home/clouway/workspaces/idea/codecparser/src/test/resources/json3.json");
+
+        ComplexPerson secondPerson = codec.parseFile(file);
+
+        assertThat(person.name, is(secondPerson.name));
+        assertThat(person.phoneNumber.get(0).number, is(secondPerson.phoneNumber.get(0).number));
+
+    }
 
 
     public class Person{
