@@ -1,6 +1,7 @@
 package com.clouway.parser;
 
 import org.junit.Test;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -109,6 +110,25 @@ public class JsonParserTest {
         assertThat(person.name, is(secondPerson.name));
         assertThat(person.phoneNumber.get(0).number, is(secondPerson.phoneNumber.get(0).number));
 
+    }
+
+    @Test
+    public void bigJsonFileToObj(){
+
+        People people;
+
+        MessageCodec<People> codec = new JsonCodec<People>(People.class);
+
+        File file = new File("/home/clouway/workspaces/idea/codecparser/src/main/resources/json2.json");
+
+        people = codec.parseFile(file);
+
+        assertThat(people.people.size(), is(80));
+
+    }
+
+    public class People{
+        List<ComplexPerson> people = new ArrayList<ComplexPerson>();
     }
 
 
