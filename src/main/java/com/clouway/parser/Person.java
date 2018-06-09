@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Person {
 
-    private String name;
+    public String name;
     private int age;
     private Map<String, String> adresses;
     private Map<String, String> phoneNumber;

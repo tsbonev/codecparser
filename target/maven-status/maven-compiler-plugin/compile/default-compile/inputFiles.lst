@@ -1,5 +1,6 @@
 /home/clouway/workspaces/idea/codecparser/src/main/java/com/clouway/parser/GsonParser.java
 /home/clouway/workspaces/idea/codecparser/src/main/java/com/clouway/parser/JacksonPareser.java
+/home/clouway/workspaces/idea/codecparser/src/main/java/com/clouway/parser/Main.java
 /home/clouway/workspaces/idea/codecparser/src/main/java/com/clouway/parser/JsonCodec.java
 /home/clouway/workspaces/idea/codecparser/src/main/java/com/clouway/parser/MessageCodec.java
 /home/clouway/workspaces/idea/codecparser/src/main/java/com/clouway/parser/ComplexPerson.java
