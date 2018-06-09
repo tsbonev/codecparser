@@ -40,7 +40,7 @@ public class JsonCodec<T> implements MessageCodec<T> {
     {
 
         try{
-            File file = new File("/home/clouway/workspaces/idea/codecparser/src/test/resources/json3.json");
+            File file = new File("src/test/resources/json3.json");
             FileWriter writer = new FileWriter(file);
             GsonBuilder builder = new GsonBuilder();
             builder.setPrettyPrinting();

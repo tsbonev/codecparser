@@ -15,7 +15,7 @@ public class JsonParserTest {
     public void parseJsonFile(){
 
         MessageCodec<Person> codec = new JsonCodec<Person>(Person.class);
-        File file = new File("/home/clouway/workspaces/idea/codecparser/src/test/resources/json2.json");
+        File file = new File("src/test/resources/json2.json");
 
         assertThat(codec.parseFile(file).name, is("John"));
         assertThat(codec.parseFile(file).age, is(20));
@@ -33,7 +33,7 @@ public class JsonParserTest {
 
         codec.parseObject(person);
 
-        File file = new File("/home/clouway/workspaces/idea/codecparser/src/test/resources/json3.json");
+        File file = new File("src/test/resources/json3.json");
 
         assertThat(file, is(notNullValue()));
         assertThat(codec.parseFile(file).age, is(20));
@@ -46,7 +46,7 @@ public class JsonParserTest {
 
         MessageCodec<ComplexPerson> codec = new JsonCodec<ComplexPerson>(ComplexPerson.class);
 
-        File file = new File("/home/clouway/workspaces/idea/codecparser/src/main/resources/json1.json");
+        File file = new File("src/main/resources/json1.json");
 
         ComplexPerson person = codec.parseFile(file);
 
@@ -103,7 +103,7 @@ public class JsonParserTest {
 
         codec.parseObject(person);
 
-        File file = new File("/home/clouway/workspaces/idea/codecparser/src/test/resources/json3.json");
+        File file = new File("src/test/resources/json3.json");
 
         ComplexPerson secondPerson = codec.parseFile(file);
 
@@ -119,7 +119,7 @@ public class JsonParserTest {
 
         MessageCodec<People> codec = new JsonCodec<People>(People.class);
 
-        File file = new File("/home/clouway/workspaces/idea/codecparser/src/main/resources/json2.json");
+        File file = new File("src/main/resources/json2.json");
 
         people = codec.parseFile(file);
 

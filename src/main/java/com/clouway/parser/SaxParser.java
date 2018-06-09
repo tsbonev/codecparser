@@ -17,7 +17,7 @@ public class SaxParser {
     public static void main(String[] args){
 
 
-        File file = new File("/home/clouway/workspaces/idea/codecparser/src/main/resources/xml1.xml");
+        File file = new File("src/main/resources/xml1.xml");
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {

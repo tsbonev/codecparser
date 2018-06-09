@@ -13,7 +13,7 @@ public class JacksonPareser {
 
     public static void main(String[] args){
 
-        parseJSON(new File("/home/clouway/workspaces/idea/codecparser/src/main/resources/json1.json"));
+        parseJSON(new File("src/main/resources/json1.json"));
 
     }
 
