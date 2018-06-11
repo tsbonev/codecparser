@@ -1,6 +1,5 @@
 package com.clouway.parser;
 
-import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

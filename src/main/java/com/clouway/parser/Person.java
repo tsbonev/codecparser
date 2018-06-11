@@ -1,6 +1,5 @@
 package com.clouway.parser;
 
-import java.lang.Object;
 import java.util.*;
 
 public class Person {

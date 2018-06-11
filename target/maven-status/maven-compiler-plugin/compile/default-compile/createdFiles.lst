@@ -1,5 +1,6 @@
 com/clouway/parser/JsonCodec.class
 com/clouway/parser/GsonParser$Albums.class
+com/clouway/parser/XmlCodec.class
 com/clouway/parser/GsonParser$1.class
 com/clouway/parser/Person.class
 com/clouway/parser/ComplexPerson.class

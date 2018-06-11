@@ -1,5 +1,6 @@
 package com.clouway.parser;
 
+import org.junit.Before;
 import org.junit.Test;
 import java.util.*;
 
@@ -11,13 +12,44 @@ import java.io.File;
 
 public class JsonParserTest {
 
+
+    ComplexPerson complexPerson;
+    Person person;
+    MessageCodec codec;
+
+    @Before
+    public void init(){
+
+        codec = new JsonCodec(Person.class);
+
+        person = new Person();
+        person.name = "John";
+        person.age = 20;
+
+        complexPerson = new ComplexPerson();
+        person.name = "Ann";
+        person.age = 20;
+
+        ComplexPerson.phoneNumber phoneNumber = new ComplexPerson.phoneNumber();
+        phoneNumber.type = "home";
+        phoneNumber.number = "555-555";
+
+        ComplexPerson.address address = new ComplexPerson.address();
+
+        address.city = "New York";
+        address.streetAddress = "Main str";
+
+        complexPerson.phoneNumber.add(phoneNumber);
+        complexPerson.address = address;
+
+    }
+
     @Test
     public void parseJsonFile(){
 
-        MessageCodec codec = new JsonCodec(Person.class);
         File file = new File("src/test/resources/json2.json");
 
-        Person person = (Person) codec.parseFile(file);
+        person = (Person) codec.parseFile(file);
 
         assertThat(person.name, is("John"));
         assertThat(person.age, is(20));
@@ -27,12 +59,6 @@ public class JsonParserTest {
     @Test
     public void parseObjectToFile() {
 
-        MessageCodec codec = new JsonCodec(Person.class);
-
-        Person person = new Person();
-        person.name = "John";
-        person.age = 20;
-
         codec.parseObject(person);
 
         File file = new File("src/test/resources/parsedJson.json");
@@ -41,14 +67,14 @@ public class JsonParserTest {
 
         assertThat(file, is(notNullValue()));
         assertThat(parsedPerson.age, is(20));
-        assertThat(parsedPerson.name, is("John"));
+        assertThat(parsedPerson.name, is("Ann"));
     }
 
     @Test
     public void parseComplexFromFile(){
 
 
-        MessageCodec codec = new JsonCodec(ComplexPerson.class);
+        codec = new JsonCodec(ComplexPerson.class);
 
         File file = new File("src/main/resources/json1.json");
 
@@ -64,23 +90,9 @@ public class JsonParserTest {
 
         MessageCodec codec = new JsonCodec(ComplexPerson.class);
 
-        ComplexPerson person = new ComplexPerson();
-        person.name = "Ann";
-        person.age = 20;
+        File file = codec.parseObject(complexPerson);
 
-        ComplexPerson.phoneNumber phoneNumber = new ComplexPerson.phoneNumber();
-        phoneNumber.type = "home";
-        phoneNumber.number = "555-555";
-
-        ComplexPerson.address address = new ComplexPerson.address();
-
-        address.city = "New York";
-        address.streetAddress = "Main str";
-
-        person.phoneNumber.add(phoneNumber);
-        person.address = address;
-
-        codec.parseObject(person);
+        assertThat(file.exists(), is(true));
 
     }
 
@@ -89,30 +101,16 @@ public class JsonParserTest {
 
         MessageCodec codec = new JsonCodec(ComplexPerson.class);
 
-        ComplexPerson person = new ComplexPerson();
-        person.name = "Ann";
-        person.age = 20;
 
-        ComplexPerson.phoneNumber phoneNumber = new ComplexPerson.phoneNumber();
-        phoneNumber.type = "home";
-        phoneNumber.number = "555-555";
 
-        ComplexPerson.address address = new ComplexPerson.address();
-
-        address.city = "New York";
-        address.streetAddress = "Main str";
-
-        person.phoneNumber.add(phoneNumber);
-        person.address = address;
-
-        codec.parseObject(person);
+        codec.parseObject(complexPerson);
 
         File file = new File("src/test/resources/parsedJson.json");
 
         ComplexPerson secondPerson = (ComplexPerson) codec.parseFile(file);
 
-        assertThat(person.name, is(secondPerson.name));
-        assertThat(person.phoneNumber.get(0).number, is(secondPerson.phoneNumber.get(0).number));
+        assertThat(complexPerson.name, is(secondPerson.name));
+        assertThat(complexPerson.phoneNumber.get(0).number, is(secondPerson.phoneNumber.get(0).number));
 
     }
 

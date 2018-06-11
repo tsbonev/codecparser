@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.clouway.parser.JsonParserTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 sec - in com.clouway.parser.JsonParserTest
+Tests run: 6, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.061 sec <<< FAILURE! - in com.clouway.parser.JsonParserTest
+parseObjectToFile(com.clouway.parser.JsonParserTest)  Time elapsed: 0.005 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at com.clouway.parser.JsonParserTest.parseObjectToFile(JsonParserTest.java:45)
+
+parseJsonFile(com.clouway.parser.JsonParserTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at com.clouway.parser.JsonParserTest.parseJsonFile(JsonParserTest.java:30)
+
