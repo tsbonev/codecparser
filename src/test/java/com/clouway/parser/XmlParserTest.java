@@ -29,11 +29,11 @@ public class XmlParserTest {
         person.name = "Ann";
         person.age = 20;
 
-        ComplexPerson.phoneNumber phoneNumber = new ComplexPerson.phoneNumber();
+        phoneNumber phoneNumber = new phoneNumber();
         phoneNumber.type = "home";
         phoneNumber.number = "555-555";
 
-        ComplexPerson.address address = new ComplexPerson.address();
+        address address = new address();
 
         address.city = "New York";
         address.streetAddress = "Main str";
@@ -87,6 +87,32 @@ public class XmlParserTest {
     @XmlAccessorType(XmlAccessType.FIELD)
     private static class ComplexPersonList{
         List<ComplexPerson> ComplexPerson = new ArrayList<>();
+    }
+
+    @XmlRootElement
+    @XmlAccessorType(XmlAccessType.FIELD)
+    private static class ComplexPerson{
+
+        public String name;
+        public int age;
+
+        public List<phoneNumber> phoneNumber = new ArrayList<phoneNumber>();
+        public address address;
+
+    }
+
+    @XmlRootElement
+    @XmlAccessorType(XmlAccessType.FIELD)
+    private static class phoneNumber {
+        public String type;
+        public String number;
+    }
+
+    @XmlRootElement
+    @XmlAccessorType(XmlAccessType.FIELD)
+    private static class address {
+        public String city;
+        public String streetAddress;
     }
 
 }

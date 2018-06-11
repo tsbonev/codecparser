@@ -2,6 +2,7 @@ package com.clouway.parser;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,11 +31,11 @@ public class JsonParserTest {
         person.name = "Ann";
         person.age = 20;
 
-        ComplexPerson.phoneNumber phoneNumber = new ComplexPerson.phoneNumber();
+        phoneNumber phoneNumber = new phoneNumber();
         phoneNumber.type = "home";
         phoneNumber.number = "555-555";
 
-        ComplexPerson.address address = new ComplexPerson.address();
+        address address = new address();
 
         address.city = "New York";
         address.streetAddress = "Main str";
@@ -129,14 +130,34 @@ public class JsonParserTest {
 
     }
 
-    public class People{
+    private class People{
         List<ComplexPerson> people = new ArrayList<ComplexPerson>();
     }
 
 
-    public class Person{
+    private class Person{
         public String name;
         public int age;
+    }
+
+    private class ComplexPerson{
+
+        public String name;
+        public int age;
+
+        public List<phoneNumber> phoneNumber = new ArrayList<phoneNumber>();
+        public address address;
+
+    }
+
+    private class phoneNumber {
+        public String type;
+        public String number;
+    }
+
+    private class address {
+        public String city;
+        public String streetAddress;
     }
 
 }
