@@ -2,9 +2,9 @@ package com.clouway.parser;
 
 import java.io.File;
 
-public interface MessageCodec<T> {
+public interface MessageCodec {
 
-    T parseFile(File file);
-    File parseObject(T object);
+    Object parseFile(File file);
+    File parseObject(Object object);
 
 }

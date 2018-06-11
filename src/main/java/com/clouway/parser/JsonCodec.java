@@ -1,5 +1,6 @@
 package com.clouway.parser;
 
+import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -8,19 +9,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class JsonCodec<T> implements MessageCodec<T> {
+public class JsonCodec implements MessageCodec {
 
-    private final Class<T> type;
+    private final Class type;
 
-    public JsonCodec(Class<T> type){
+    public JsonCodec(Class type){
         this.type = type;
     }
 
-    public Class<T> getMyType(){
+    private Class getMyType(){
         return this.type;
     }
 
-    public T parseFile(File file)
+    @Override
+    public Object parseFile(File file)
     {
         GsonBuilder builder = new GsonBuilder();
 
@@ -36,11 +38,12 @@ public class JsonCodec<T> implements MessageCodec<T> {
 
     }
 
-    public File parseObject(T obj)
+    @Override
+    public File parseObject(Object obj)
     {
 
         try{
-            File file = new File("src/test/resources/json3.json");
+            File file = new File("src/test/resources/parsedJson.json");
             FileWriter writer = new FileWriter(file);
             GsonBuilder builder = new GsonBuilder();
             builder.setPrettyPrinting();

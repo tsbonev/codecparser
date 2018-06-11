@@ -14,18 +14,20 @@ public class JsonParserTest {
     @Test
     public void parseJsonFile(){
 
-        MessageCodec<Person> codec = new JsonCodec<Person>(Person.class);
+        MessageCodec codec = new JsonCodec(Person.class);
         File file = new File("src/test/resources/json2.json");
 
-        assertThat(codec.parseFile(file).name, is("John"));
-        assertThat(codec.parseFile(file).age, is(20));
+        Person person = (Person) codec.parseFile(file);
+
+        assertThat(person.name, is("John"));
+        assertThat(person.age, is(20));
 
     }
 
     @Test
     public void parseObjectToFile() {
 
-        MessageCodec<Person> codec = new JsonCodec<Person>(Person.class);
+        MessageCodec codec = new JsonCodec(Person.class);
 
         Person person = new Person();
         person.name = "John";
@@ -33,22 +35,24 @@ public class JsonParserTest {
 
         codec.parseObject(person);
 
-        File file = new File("src/test/resources/json3.json");
+        File file = new File("src/test/resources/parsedJson.json");
+
+        Person parsedPerson = (Person) codec.parseFile(file);
 
         assertThat(file, is(notNullValue()));
-        assertThat(codec.parseFile(file).age, is(20));
-        assertThat(codec.parseFile(file).name, is("John"));
+        assertThat(parsedPerson.age, is(20));
+        assertThat(parsedPerson.name, is("John"));
     }
 
     @Test
     public void parseComplexFromFile(){
 
 
-        MessageCodec<ComplexPerson> codec = new JsonCodec<ComplexPerson>(ComplexPerson.class);
+        MessageCodec codec = new JsonCodec(ComplexPerson.class);
 
         File file = new File("src/main/resources/json1.json");
 
-        ComplexPerson person = codec.parseFile(file);
+        ComplexPerson person = (ComplexPerson) codec.parseFile(file);
 
         assertThat(person.phoneNumber.get(0).type, is("home"));
 
@@ -58,7 +62,7 @@ public class JsonParserTest {
     @Test
     public void parseComplexJsonToObject(){
 
-        MessageCodec<ComplexPerson> codec = new JsonCodec<ComplexPerson>(ComplexPerson.class);
+        MessageCodec codec = new JsonCodec(ComplexPerson.class);
 
         ComplexPerson person = new ComplexPerson();
         person.name = "Ann";
@@ -83,7 +87,7 @@ public class JsonParserTest {
     @Test
     public void flipFileToObjectAndBack(){
 
-        MessageCodec<ComplexPerson> codec = new JsonCodec<ComplexPerson>(ComplexPerson.class);
+        MessageCodec codec = new JsonCodec(ComplexPerson.class);
 
         ComplexPerson person = new ComplexPerson();
         person.name = "Ann";
@@ -103,9 +107,9 @@ public class JsonParserTest {
 
         codec.parseObject(person);
 
-        File file = new File("src/test/resources/json3.json");
+        File file = new File("src/test/resources/parsedJson.json");
 
-        ComplexPerson secondPerson = codec.parseFile(file);
+        ComplexPerson secondPerson = (ComplexPerson) codec.parseFile(file);
 
         assertThat(person.name, is(secondPerson.name));
         assertThat(person.phoneNumber.get(0).number, is(secondPerson.phoneNumber.get(0).number));
@@ -117,11 +121,11 @@ public class JsonParserTest {
 
         People people;
 
-        MessageCodec<People> codec = new JsonCodec<People>(People.class);
+        MessageCodec codec = new JsonCodec(People.class);
 
         File file = new File("src/main/resources/json2.json");
 
-        people = codec.parseFile(file);
+        people = (People) codec.parseFile(file);
 
         assertThat(people.people.size(), is(80));
 
