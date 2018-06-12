@@ -100,9 +100,7 @@ public class JsonParserTest {
     @Test
     public void flipFileToObjectAndBack(){
 
-        MessageCodec codec = new JsonCodec(ComplexPerson.class);
-
-
+        codec = new JsonCodec(ComplexPerson.class);
 
         codec.parseObject(complexPerson);
 
@@ -116,17 +114,39 @@ public class JsonParserTest {
     }
 
     @Test
-    public void bigJsonFileToObj(){
+    public void bigJsonFileToObjAndViceVersa(){
 
         People people;
 
-        MessageCodec codec = new JsonCodec(People.class);
+        codec = new JsonCodec(People.class);
 
         File file = new File("src/main/resources/json2.json");
 
         people = (People) codec.parseFile(file);
 
-        assertThat(people.people.size(), is(80));
+        File parsedFile = codec.parseObject(people);
+
+        assertThat(people.people.size(), is(960));
+        assertThat(parsedFile.exists(), is(true));
+    }
+
+    @Test
+    public void bigPOJOToFileAndViceVersa(){
+
+        People people = new People();
+
+        codec = new JsonCodec(People.class);
+
+        for(int i = 0; i < 960; i++){
+            people.people.add(complexPerson);
+        }
+
+        File parsedFile = codec.parseObject(people);
+
+        people = (People) codec.parseFile(parsedFile);
+
+        assertThat(people.people.size(), is(960));
+        assertThat(parsedFile.exists(), is(true));
 
     }
 

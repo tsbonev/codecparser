@@ -68,17 +68,17 @@ public class XmlParserTest {
 
         ComplexPersonList list = new ComplexPersonList();
 
-
-        for(int i = 0; i < 500; i++){
+        for(int i = 0; i < 960; i++){
             list.ComplexPerson.add(person);
         }
 
         File file = codec.parseObject(list);
 
-        ComplexPersonList newList = (ComplexPersonList) codec.parseFile(file);
+        list = (ComplexPersonList) codec.parseFile(file);
 
+        assertThat(list.ComplexPerson.size(), is(960));
+        assertThat(file.exists(), is(true));
 
-        assertThat(newList.ComplexPerson.size(), is(500));
 
     }
 
